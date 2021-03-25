@@ -1,0 +1,15 @@
+:root {
+    --color-primary: #3F2D6A;
+    --color-dark-primary: #10003A;
+    --color-purple-gray: #4A4453;
+    --color-light: #F9EAFF;
+    --color-special-green: #00C9A4;
+    --color-white: #ffff;  
+}
+html {
+    font-size: 62.5%;
+    font-family: 'DM Sans', sans-serif;
+}
+body {
+    background-color: var(--color-dark-primary);
+}
