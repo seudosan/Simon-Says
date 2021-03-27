@@ -16,21 +16,27 @@
 <body>
     <header>
     </header>
-    <main>
-        <section></section>
-        <section class="game">
-            <div class="game__gameboard">
-                <div id="yellow-board" class="gameboard gameboard--yellow"></div>
-                <div id="blue-board" class="gameboard gameboard--blue"></div>
-                <div id="red-board" class="gameboard gameboard--red"></div>
-                <div id="green-board" class="gameboard gameboard--green"></div>
-                <div class="game-status">
-                    <span class="game-status__display">Score</span>
+    <main class="game-container">
+        <section class="game-status">
+            <div class="game-status__container">
+                <p id="gameStatusTitle" class="game-status__title">IN WAITING...</p>
+                <p id="gameStatusSubtitle" class="game-status__subtitle">Press on "START GAME"</p>
+            </div>
+        </section>
+        <section class="game-board">
+            <div class="game-board__container">
+                <div id="yellowBoard" class="gameboard gameboard--yellow gameboard--inactive"></div>
+                <div id="blueBoard" class="gameboard gameboard--blue gameboard--inactive"></div>
+                <div id="redBoard" class="gameboard gameboard--red gameboard--inactive"></div>
+                <div id="greenBoard" class="gameboard gameboard--green gameboard--inactive"></div>
+                <div class="game-board__central-circle">
+                    <span id="gameBoardCircleTitle" class="game-board__title">SIMON</span>
                 </div>
             </div>
-            <a id="start-game" class="game__button" href="#">START GAME</a>
         </section>
-        <section></section>
+        <section class="game-buttons">
+            <a id="buttonStartGame" class="game-button__start-game">START GAME</a>
+        </section>
     </main>
     <footer>
 
