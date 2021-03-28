@@ -134,6 +134,7 @@ class SimonSays {
             }
         } else {
             this.removeClickEvents();
+            this.disableGame();
             alert("Perdio");
         }
     }
