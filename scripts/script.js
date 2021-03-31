@@ -6,6 +6,7 @@ const greenBoard = document.getElementById('greenBoard');
 const gameBoardCircleTitle = document.getElementById('gameBoardCircleTitle');
 const gameStatusTitle = document.getElementById('gameStatusTitle');
 const gameStatusSubtitle = document.getElementById('gameStatusSubtitle');
+const sound = new Audio('../assets/ponglong.wav');
 const lastLevelGame = 3;
 
 function eventTester(element = "NO DEFINIDO") {
@@ -98,6 +99,7 @@ class SimonSays {
     }
     iluminateColour(colour) {
         this.colours[colour].classList.add('gameboard--light');
+        sound.play();
         setTimeout(() => this.killColour(colour) , 500);
     }
     killColour(colour) {
@@ -116,6 +118,7 @@ class SimonSays {
         this.colours.green.removeEventListener('mousedown', this.selectColour);
     }
     selectColour(ev) {
+        console.log('Message');
         const nameColour = ev.target.dataset.colour;
         const numberColour = this.changeColourToNumber(nameColour);
         this.iluminateColour(nameColour);
@@ -144,6 +147,14 @@ class SimonSays {
     }
 
 
+}
+
+function reverseInterval(seconds) {
+    let sec = seconds;
+    setInterval(() => {
+        changeMessageIn(gameBoardCircleTitle, sec);
+        sec--;
+    }, 1000);
 }
 
 function startSimonSays() {

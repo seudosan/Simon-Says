@@ -70,6 +70,9 @@ body {
     background-color: var(--color-dark-primary);
     border: 12px solid var(--color-dark-primary);
 }
+.gameboard {
+    background-image: url(../assets/icons/dark-box.svg);
+}
 .gameboard--yellow {
     grid-area: yellow-area;
     background-color: yellow;
@@ -89,9 +92,6 @@ body {
 .gameboard--light {
     box-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
     background-image: url(../assets/icons/white-box.svg);
-}
-.gameboard--inactive {
-    background-image: url(../assets/icons/dark-box.svg);
 }
 .game-board__central-circle {
     position: absolute;
