@@ -51,10 +51,7 @@ class SimonSays {
     disableGame() {
         changeMessageIn(gameStatusTitle, 'IN WAITING...')
         changeMessageIn(gameStatusSubtitle, `Press on "START GAME"`);
-        yellowBoard.classList.add('gameboard--inactive');
-        blueBoard.classList.add('gameboard--inactive');
-        redBoard.classList.add('gameboard--inactive');
-        greenBoard.classList.add('gameboard--inactive');
+        this.stopInterval();
         buttonStartGame.classList.remove('hide-element')
     }
     generateSequence() {
@@ -99,7 +96,8 @@ class SimonSays {
         setTimeout(() => {
             this.addClickEvents();
             this.startInterval();
-        }, (this.gameLevel + .05) * 1000);
+            changeMessageIn(gameStatusTitle, 'REPEAT THE SEQUENCE');
+        }, (this.gameLevel + 1) * 1000);
     }
     iluminateColour(colour) {
         this.colours[colour].classList.add('gameboard--light');
@@ -148,9 +146,8 @@ class SimonSays {
                 this.gameLevel++;
                 this.removeClickEvents();
                 if(this.gameLevel === (lastLevelGame + 1)) {
-                    alert("Gano")
+                    this.winAlert();
                     this.disableGame();
-                    this.stopInterval();
                 } else {
                     this.nextLevel()
                 }
@@ -158,8 +155,27 @@ class SimonSays {
         } else {
             this.removeClickEvents();
             this.disableGame();
-            alert("Perdio");
+            this.loseAlert();
         }
+    }
+    winAlert() {
+        swal({
+            title: "GOOD GAME!",
+            text: 'You have completed all the sequences correctly.',
+            icon: "success",
+            buttons: false,
+            timer: 5000
+          });
+    }
+    loseAlert() {
+        swal({
+            title: "GAME OVER!",
+            text: `Oops! You were unable to complete the sequence. 
+            Luck for the next.`,
+            icon: "error",
+            buttons: false,
+            timer: 5000
+          });
     }
 }
 
