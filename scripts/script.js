@@ -7,7 +7,7 @@ const gameBoardCircleTitle = document.getElementById('gameBoardCircleTitle');
 const gameStatusTitle = document.getElementById('gameStatusTitle');
 const gameStatusSubtitle = document.getElementById('gameStatusSubtitle');
 const sound = new Audio('../assets/ponglong.wav');
-const lastLevelGame = 3;
+const lastLevelGame = 10;
 
 function eventTester(element = "NO DEFINIDO") {
     alert(`This element is ${element}`);
@@ -126,6 +126,7 @@ class SimonSays {
     regressiveCount() {
         if (this.secondOfTimer < 0) {
             this.stopInterval();
+            this.noTimeAlert();
             this.disableGame();
         } else {
             changeMessageIn(gameBoardCircleTitle, this.secondOfTimer);
@@ -173,6 +174,15 @@ class SimonSays {
             text: `Oops! You were unable to complete the sequence. 
             Luck for the next.`,
             icon: "error",
+            buttons: false,
+            timer: 5000
+          });
+    }
+    noTimeAlert() {
+        swal({
+            title: "TIME OVER!",
+            text: `Oops! You have not made it in time. Try again!`,
+            icon: "warning",
             buttons: false,
             timer: 5000
           });
