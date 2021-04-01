@@ -85,17 +85,21 @@ class SimonSays {
         }
     }
     nextLevel() {
+        this.stopInterval();
         this.sequenceLevel = 0;
         changeMessageIn(gameStatusTitle, 'WHACH THE SEQUENCE!');
         changeMessageIn(gameStatusSubtitle, `Current Level: ${this.gameLevel}`);
         setTimeout(() => this.iluminateSequence(), 1500);
-        this.addClickEvents();
     }
     iluminateSequence() {
         for(let i = 0; i < this.gameLevel; i++) {
             let colour = this.changeNumberToColour(this.randomSequence[i]);
             setTimeout(() => this.iluminateColour(colour), 1500 * i);
         }
+        setTimeout(() => {
+            this.addClickEvents();
+            this.startInterval();
+        }, (this.gameLevel + .05) * 1000);
     }
     iluminateColour(colour) {
         this.colours[colour].classList.add('gameboard--light');
@@ -117,20 +121,36 @@ class SimonSays {
         this.colours.red.removeEventListener('mousedown', this.selectColour);
         this.colours.green.removeEventListener('mousedown', this.selectColour);
     }
+    startInterval() {
+        this.secondOfTimer = 15;
+        this.intervalTimer = setInterval(() => {this.regressiveCount()}, 1000);
+    }
+    regressiveCount() {
+        if (this.secondOfTimer < 0) {
+            this.stopInterval();
+            this.disableGame();
+        } else {
+            changeMessageIn(gameBoardCircleTitle, this.secondOfTimer);
+        }
+        this.secondOfTimer--;
+    }
+    stopInterval() {
+        clearInterval(this.intervalTimer);
+        changeMessageIn(gameBoardCircleTitle, 'SIMON');
+    }
     selectColour(ev) {
-        console.log('Message');
         const nameColour = ev.target.dataset.colour;
         const numberColour = this.changeColourToNumber(nameColour);
         this.iluminateColour(nameColour);
         if (numberColour === this.randomSequence[this.sequenceLevel]) {
             this.sequenceLevel++;
             if(this.sequenceLevel === this.gameLevel) {
-                this.goodMessage();
                 this.gameLevel++;
                 this.removeClickEvents();
                 if(this.gameLevel === (lastLevelGame + 1)) {
                     alert("Gano")
                     this.disableGame();
+                    this.stopInterval();
                 } else {
                     this.nextLevel()
                 }
@@ -141,12 +161,6 @@ class SimonSays {
             alert("Perdio");
         }
     }
-    goodMessage() {
-        changeMessageIn(gameBoardCircleTitle, "GOOD!");
-        setTimeout((()=> changeMessageIn(gameBoardCircleTitle, "SIMON")), 1500);
-    }
-
-
 }
 
 function reverseInterval(seconds) {
